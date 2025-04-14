@@ -22,7 +22,5 @@ Exercitar conhecimentos básicos da linguagem C# e do ecossistema .NET em um pro
 
 ## 💵 Taxas de Câmbio Usadas
 
-- 1 BRL = **0.20 USD**
-- 1 BRL = **0.18 EUR**
-
-## 📸 Exemplo de execução
+- 1 BRL = **0.1711596 USD**
+- 1 BRL = **0.1506955 EUR**
