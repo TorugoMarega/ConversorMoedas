@@ -26,7 +26,7 @@ namespace ConversorMoedas.Services
 
         public List<Moeda> CriaMoedas() {
             Moeda brl = new Moeda();
-            brl.TaxaConversao = this._taxas.getUsd();
+            brl.TaxaConversao = 0.0; // Real não tem taxa de conversão
             brl.Nome = ("Real");
             brl.Simbolo = "BRL";
 
@@ -40,10 +40,21 @@ namespace ConversorMoedas.Services
             eur.Nome = ("Euro");
             eur.Simbolo = "EUR";
 
+            this._moedas.Add(brl);
             this._moedas.Add(usd);
             this._moedas.Add(eur);
 
             return this._moedas;
+        }
+
+        public void DebugMoedasToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var moeda in _moedas)
+            {
+                sb.AppendLine($"Nome: {moeda.Nome}, Simbolo: {moeda.Simbolo}, Taxa de Conversão: {moeda.TaxaConversao}");
+            }
+             Console.WriteLine(sb.ToString());
         }
     }
 }

@@ -8,36 +8,51 @@ namespace ConversorMoedas.Utils
 {
     class EntradaHelper
     {
-        public Double LerValorMonetario() { 
-            Console.WriteLine("Digite o valor a ser convertido: ");
-            string valor = Console.ReadLine();
-            return Double.Parse(valor);
+        public Double LerValorMonetario() {
+            Console.WriteLine("\nDigite o valor a ser convertido:");
+            if (double.TryParse(Console.ReadLine(), out double valor))
+            {
+                return valor;
+            }
+            else
+            {
+                Console.WriteLine("\nValor inválido. Tente novamente.");
+                return LerValorMonetario();
+            }
         }
 
-        public void LerMoeda(Boolean origemDestino, int moedaOrigemDestino) {
+        public int LerMoeda(Boolean origemDestino, ref int moeda, int index) {
             if (origemDestino)
             {
-                Console.WriteLine("Digite o COD da moeda de origem: ");
+                Console.WriteLine("\nDigite o COD da moeda de origem: ");
             }
             else {
-                Console.WriteLine("Digite o COD da moeda de destino: ");
+                Console.WriteLine("\nDigite o COD da moeda de destino: ");
             }
+            moeda = int.Parse(Console.ReadLine());
 
-            moedaOrigemDestino = int.Parse(Console.ReadLine());
+            if (moeda > index || origemDestino && moeda > 0 || !origemDestino && moeda < 1)
+            {
+                Console.WriteLine("\nOpção inválida. Tente novamente.");
+                LerMoeda(origemDestino, ref moeda, index);
+            }
+            return moeda;
         }
-        public void DesejaContinuar() {
+        public void DesejaContinuar(ref bool op) {
 
-                Console.WriteLine("Deseja continuar? (S/N)");
+                Console.WriteLine("\nDeseja continuar? (S/N)");
                 string resposta = Console.ReadLine();
-                if (resposta.ToUpper() != "S")
+                Console.WriteLine("--------------------------\n");
+            if (resposta.ToUpper() != "S")
                 {
-                PararPrograma();
+                    PararPrograma(ref op);
                 }
         }
 
-        public void PararPrograma()
+        public void PararPrograma(ref bool op)
         {
-            Console.WriteLine("Pressione qualquer tecla para sair...");
+            op = false;
+            Console.WriteLine("\nPressione qualquer tecla para sair...");
             Console.ReadKey();
         }
     }
