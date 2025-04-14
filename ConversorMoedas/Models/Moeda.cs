@@ -8,5 +8,8 @@ namespace ConversorMoedas.Models
 {
     class Moeda
     {
+        String nome { get; set; }
+        String simbolo { get; set; }
+        Double taxaConversao { get; set; }
     }
 }
