@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConversorMoedas.Utils
 {
-    class EntradaHelper
+    public class EntradaHelper
     {
         public Double LerValorMonetario() {
             Console.WriteLine("\nDigite o valor a ser convertido:");
@@ -21,23 +21,35 @@ namespace ConversorMoedas.Utils
             }
         }
 
-        public int LerMoeda(Boolean origemDestino, ref int moeda, int index) {
+        public int LerMoeda(bool origemDestino, ref int moeda, int index)
+        {
             if (origemDestino)
-            {
                 Console.WriteLine("\nDigite o COD da moeda de origem: ");
-            }
-            else {
+            else
                 Console.WriteLine("\nDigite o COD da moeda de destino: ");
-            }
-            moeda = int.Parse(Console.ReadLine());
 
-            if (moeda > index || origemDestino && moeda > 0 || !origemDestino && moeda < 1)
+            if (!int.TryParse(Console.ReadLine(), out int codigo))
+            {
+                Console.WriteLine("\nEntrada inválida. Tente novamente.");
+                return LerMoeda(origemDestino, ref moeda, index);
+            }
+
+            // Validação das regras
+            bool entradaInvalida =
+                codigo > index ||
+                (origemDestino && codigo > 0) ||    // moeda de origem deve ser 0
+                (!origemDestino && codigo < 1);     // moeda de destino não pode ser 0
+
+            if (entradaInvalida)
             {
                 Console.WriteLine("\nOpção inválida. Tente novamente.");
-                LerMoeda(origemDestino, ref moeda, index);
+                return LerMoeda(origemDestino, ref moeda, index);
             }
+
+            moeda = codigo;
             return moeda;
         }
+
         public void DesejaContinuar(ref bool op) {
 
                 Console.WriteLine("\nDeseja continuar? (S/N)");

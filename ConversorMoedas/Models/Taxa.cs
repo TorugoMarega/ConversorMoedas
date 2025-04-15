@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 
 namespace ConversorMoedas.Models
 {
-    class Taxas
+    public class Taxas
     {
-        private Double _usd = 0.1711596;
-        private Double _eur = 0.1506955;
+        private readonly Double _usd = 0.1711596;
+        //private readonly Double _usd = 5;
+        private readonly Double _eur = 0.1506955;
 
-        public Double getUsd()
+        public Double GetUsd()
         {
             return _usd;
         }
 
-        public Double getEur()
+        public Double GetEur()
         {
             return _eur;
         }
