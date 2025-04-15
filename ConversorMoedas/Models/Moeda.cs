@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ConversorMoedas.Models
 {
-    class Moeda
+    public class Moeda
     {
         public String Nome { get; set; }
         public String Simbolo { get; set; }
